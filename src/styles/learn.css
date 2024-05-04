@@ -1,0 +1,104 @@
+.main__hero__section{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    padding: 2rem 0;
+    height: 70vh;
+    /* background-color: #fff; */
+}
+.hero__descript{
+    width: 100%;
+    margin-top: 3rem;
+    /* text-align: center; */
+}
+
+.hero__descript .span{
+    font-family: arial;
+    font-weight: 600;
+    color: #5161ce;
+}
+.main__hero__section .hero__descript h1{
+    font-size: 55px;
+    font-family: arial;
+    padding: 0.8rem 3rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.hero__descript .buttons1{
+    margin: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .main__hero__section .hero__descript{
+    width: 70%;
+} */
+
+/* .main__hero__section .hero__image{
+    width: 50%;
+} */
+.hero__descript span{
+    padding: 0 3rem;
+    font-size: 19px;
+    font-family: arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main__hero__section .hero__image img{
+    width: 500px;
+    height: 370px;
+    max-width: 650px;
+    border-radius: 50px;
+    padding-top: 1rem;
+    margin-right: 2rem;
+}
+
+.descriptionn{
+    padding: 0 3rem;
+    background-color: #fff;
+}
+
+.descriptionn h3{
+    font-size: 30px;
+    font-family: arial;
+    padding: 10px 0;
+}
+
+.descriptionn p{
+    padding: 5px 0;
+    line-height: 25px;
+    opacity: 0.8;
+    font-family: arial;
+}
+
+.second__desc{
+    padding: 2rem 3rem;
+    background-color: #fff;
+}
+
+.second__desc h3{
+    font-size: 30px;
+    font-family: arial;
+    padding: 10px 0;
+}
+
+.second__desc p{
+    padding: 5px 0;
+    line-height: 25px;
+    opacity: 0.8;
+    font-family: arial;
+}
+
+
+.about__desc {
+    display: flex;
+}
+
+.about__desc img{
+    width: 500px;
+}
