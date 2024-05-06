@@ -16,7 +16,9 @@ import DesignerView from '@/views/DesignerView.vue';
 import { isAuthenticated } from '@/auth/auth';
 import LearnMore from '@/views/LearnMore.vue';
 import DesignerSection from '@/views/DesignerSection.vue';
-import PopUp from '@/components/popup/PopUp.vue'
+import PopUp from '@/components/popup/PopUp.vue';
+import DemoSeach from '@/components/DemoSeach.vue';
+import SearcHed from '@/components/SearcHed.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -50,6 +52,13 @@ const router = createRouter({
             component: DetailsPage,
             name: 'DesignerDetails',
             meta: { requiresAuth: true }
+        },
+
+        {
+            path: '/search/:name',
+            component: SearcHed,
+            name: 'SearchDetails',
+            meta: { requiresAuth: false }
         },
 
         {
@@ -93,6 +102,13 @@ const router = createRouter({
         {
             path: '/verify-cus',
             component: VeriFication,
+            meta: { requiresAuth: false }
+        },
+
+        
+        {
+            path: '/demo-search',
+            component: DemoSeach,
             meta: { requiresAuth: false }
         },
     ]

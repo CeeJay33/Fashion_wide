@@ -45,7 +45,6 @@ export default {
     this.stopAnimation();
   },
   computed: {
-    // Duplicate the designers array to create seamless scrolling
     duplicatedDesigners() {
       return [...this.designers, ];
     }

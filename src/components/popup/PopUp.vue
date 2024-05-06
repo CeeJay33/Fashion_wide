@@ -1,356 +1,244 @@
 <template>
-    <div>
-      <nav>
-        <h1>Website Title</h1>
-        <ul>
-          <li ref="firstChild">Home</li>
-          <li ref="secondChild">About</li>
-          <li ref="thirdChild">Contact Form</li>
-        </ul>
-        <div class="underline"></div>
-      </nav>
-      <div class="container">
-        <button @click="togglePopup">Click Here</button>
-      </div>
-      <div class="overlay" v-show="isPopupVisible" @click="togglePopup"></div>
-      <div class="main-popup" v-show="isPopupVisible">
-        <div class="popup-header">
-          <div id="popup-close-button"><a href="#" @click="togglePopup"></a></div>
-          <ul>
-            <li :class="{ active: isSignInVisible }"><a href="#" @click="showSignI">Sign In</a></li>
-            <li :class="{ active: isRegisterVisible }"><a href="#" @click="showRegiste">Register</a></li>
-          </ul>
+  <div class="pop__up__modal" v-show="isVisible" @click="closeModal">
+    <div class="div_modal_pop" @click.stop>
+      <div class="form__box">
+        <i class="fas fa-x" @click="closeModal"></i>
+        <h2>Sign In to Continue</h2>
+        <p>Let's get you in as a <strong>Customer</strong></p>
+        <form v-on:submit.prevent="addItem" autocomplete="off">
+                <div class="error" v-if="responseData.message">
+                    <p>{{ responseData.message }}</p>
+                </div>
+                <div class="input__form">
+                    <input type="email" name="itemEmail" placeholder="Enter your Email" v-model="FormData.itemEmail">
+                </div>
+                <div class="input__form">
+                    <input type="password" name="itemPassword" placeholder="Password" v-model="FormData.itemPassword">
+                </div>
+                <div class="submit">
+                    <input type="submit" style="" value="SignUp Now" class="button">
+                </div>
+          
+          <div class="submit">
+            <button ><img :src="require('@/assets/vecteezy_colourful-google-logo-in-dark-background_13760951-removebg-preview.png')" alt=""> Continue with Google</button>
+          </div>
+        </form>
+        <div class="ssubmit">
+            <button >Sign In as Designer</button>
+          </div>
+        <div class="Forgot">
+          <router-link to="">
+            <p>Forgot Password</p>
+          </router-link>
         </div>
-        <div class="popup-content">
-          <form action="#" class="sign-in" v-show="isSignInVisible">
-            <label for="email">Email:</label>
-            <input type="text" id="email">
-            <label for="password">Password:</label>
-            <input type="password" id="password">
-            <p class="check-mark">
-              <input type="checkbox" id="remember-me">
-              <label for="remember-me">Remember me</label>
-            </p>
-            <input type="submit" id="submit" value="Submit">
-          </form>
-          <form action="#" class="register" v-show="isRegisterVisible">
-            <label for="email-register">Email:</label>
-            <input type="text" id="email-register">
-            <label for="password-register">Password:</label>
-            <input type="password" id="password-register">
-            <label for="password-confirmation">Confirm Password:</label>
-            <input type="password" id="password-confirmation">
-            <p class="check-mark">
-              <input type="checkbox" id="accept-terms">
-              <label for="accept-terms">I agree to the <a href="#">Terms</a></label>
-            </p>
-            <input type="submit" id="submit" value="Create Account">
-          </form>
+        <div class="sign__up__link">
+          <router-link to="/register-customer">
+            <p>Get an account</p>
+          </router-link>
         </div>
       </div>
     </div>
-  </template>
-<!--  -->
-  
-  <style>
-  html, body, * {
-  box-sizing: border-box;
-}
+  </div>
+</template>
 
+<script>
+import axios from 'axios';
+export default {
+  props: {
+    isVisible: {
+      type: Boolean,
+      default: false
+    }
+  },
 
-.underline {
-  position: absolute;
-  height: 4px;
-  background-color: #ceaee8;
-  transition: all 0.5s ease;
-}
+  data() {
+        return {
+            FormData: {
+                itemEmail: '',
+                itemPassword: ''
+            },
+            responseData: {
+                message: ''
+            }
+        };
+    },
 
-.container {
+  methods: {
+    openModal() {
+      this.$emit('open'); 
+    },
+    closeModal() {
+      this.$emit('close');
+    },
+
+    async addItem() {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: 'http://localhost:80/Fashion2/Fashion/ProgramSignInC.php',
+                withCredentials: true,
+                data: {
+                    itemEmail: this.FormData.itemEmail,
+                    itemPassword: this.FormData.itemPassword
+                },
+                headers: {
+                    "content-type": "application/x-www-form-urlencoded"
+                }
+            });
+            this.responseData = response.data;
+            if (this.responseData.status === "success") {
+                this.$router.push('/dashboard');
+            }
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                this.responseData.message = error.response.data.message;
+            } else {
+                this.responseData.message = "An error occurred. Please try again later.";
+            }
+            setTimeout(() => {
+                this.responseData.message = '';
+            }, 3000);
+        }
+    }
+  }
+};
+</script>
+
+<style>
+.pop__up__modal {
   width: 100%;
   height: 100vh;
-  background-color: #e7e7f6;
-  border-radius: 5px;
-  z-index: 2;
-}
-
-.container button {
-  position: relative;
-  left: 50%;
-  top: 50%;
-  height: 70px;
-  width: 200px;
-  margin: -35px 0 0 -100px;
-  padding: 15px 30px;
-  border-radius: 5px;
-  background-color: #ceaee8;
-  color: #fff;
-  font-size: 1.5em;
-  cursor: pointer;
-  -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-  outline: none;
-}
-
-button:hover {
-  opacity : 0.8;
-  box-shadow: 0 2px 5px #9a9a9a;
-}
-
-.overlay {
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 17, 17, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(6px); /* Apply blur effect */
+  overflow-y: hidden;
+  z-index: 9999;
+}
+
+.div_modal_pop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 10;
-  opacity: 0;
-  visibility: hidden;
-  transition: all .5s ease;
+  z-index: 9999;
 }
 
-.overlay.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.main-popup {
-  position: fixed;
-  left: 0;
-  top: 30px;
-  margin: 0;
-  width: 100%;
-  height: 450px;
-  background-color: #e7e7f6;
-  border-radius: 5px;
-  z-index: 15;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-20px);
-  transition: all .5s ease;
-  /*overflow: hidden;*/
-}
-
-.main-popup.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(10px);
-  transition: all .5s ease;
-}
-
-@media (min-width: 500px) {
-  .main-popup {
-    width: 500px;
-    left: 50%;
-    margin: 0 0 0 -250px;
-  }
-}
-
-.popup-header {
+.form__box {
   position: relative;
-  padding: 0;
-  margin: 0;
-  height: 62px;
+  background: transparent;
   width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  padding: 30px 30px;
+  margin: auto;
+  box-shadow: 0 10px 20px 30px rgba(0, 0, 0, 0.01);
+  background-color: #fffffff1;
+  z-index: 9999;
 }
 
-#popup-close-button a {
+.form__box .fa-x {
   position: absolute;
-  right: 10px;
-  top: -30px;
-  width: 22px;
-  height: 22px;
-}
-
-#popup-close-button a::before {
-  content: '';
-  position: absolute;
-  right: 10px;
-  top: 0;
-  width: 3px;
-  height: 25px;
-  background-color: #fff;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-#popup-close-button a::after {
-  content: '';
-  position: absolute;
-  right: 10px;
-  top: 0;
-  width: 3px;
-  height: 25px;
-  background-color: #fff;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-
-.popup-header ul {
-  margin: 0;
-  padding: 0;
-}
-
-.popup-header ul li {
-  text-align: center;
-  list-style: none;
-  width: 50%;
-  float: left;
-}
-
-.popup-header ul li a {
-  display: block;
-  padding: 20px 0;
-  margin: 0;
-  text-decoration: none;
-  font-size: 1.2em;
-}
-
-#sign-in {
-  background-color: #ceaee8;
-  color: #fff;
-  border-radius: 5px 0 0 0;
-}
-
-#sign-in.active {
-  color: #ceaee8;
-  background-color: transparent;
-}
-
-#register {
-  background-color: #ceaee8;
-  color: #fff;
-  border-radius: 0 5px 0 0;
-}
-
-#register.active {
-  color: #ceaee8;
-  background-color: transparent;
-}
-
-.popup-content {
-  height: 400px;
-  overflow: hidden;
-}
-
-form.sign-in {
-  position: relative; 
-  top: 40px;
-  left: 0;
-  font-size: 1em;
-  opacity: 1;
-  -webkit-transition: all .35s;
-  -moz-transition: all .35s;
-  -o-transition: all .35s;
-  transition: all .35s;
-}
-
-form.sign-in.move-left {
-  opacity: 0;
-  transform: translateX(-450px);
-}
-
-form.sign-in form label {
-  font-size: 1.1em;
-  color: #ceaee8;
-  margin-left: 23px;
-}
-
-form.sign-in input {
-  border-radius: 5px;
-  width: 90%;
-  height: 40px;
-  margin: 5px 5% 30px 5%;
-  padding: 10px;
-  font-size: 1em;
-  color: #ceaee8;
-  outline: none;
-  border: none;
-}
-
-input#submit {
-  background-color: #ceaee8;
-  color: #fff;
-  height: 50px;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 25px;
-  padding: 0;
+  top: -25px;
+  right: 0;
+  font-size: 23px;
+  font-family: Arial;
+  font-weight: 600;
   cursor: pointer;
-  outline: none;
-  border-radius: 5px;
-  font-size: 1em;
-  border: none;
+  color: #000000;
 }
 
-form.register {
-  position: relative; 
-  top: -280px;
-  left: 0;
-  font-size: 1em;
-  opacity: 0;
-  transform: translateX(450px);
-  -webkit-transition: all .35s;
-  -moz-transition: all .35s;
-  -o-transition: all .35s;
-  transition: all .35s;
+.form__box .error{
+  display: block;
+    color: #851925;
+    text-align: center;
+    border-radius: 4px;
+    padding: 7px 0;
 }
 
-form.register.move-left {
-  opacity: 1;
-  transform: translateX(0);
+.form__box .fa-x:hover {
+  color: red;
 }
 
-form.register input {
-  border-radius: 5px;
-  width: 90%;
+.input__form {
+  margin: 10px 0;
+}
+
+.input__form input {
   height: 40px;
-  margin: 5px 5% 15px 5%;
-  padding: 10px;
-  font-size: 1em;
-  color: #ceaee8;
-  outline: none;
+  width: 90%;
+  padding: 0 15px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid #e8e8e8;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.form__box h2 {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 10px 0;
+}
+
+.form__box p {
+  font-size: 14px;
+}
+
+.form__box form {
+  margin: 1px 0;
+}
+
+.form__box form input.button {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
+  color: #000;
+  width: 90%;
+  opacity: 0.7;
+  font-family: arial;
+  font-weight: 600;
+  margin: 13px auto;
+  font-size: 17px;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #000;
 }
 
-p.check-mark {
-  position: relative;
-  left: 50%;
-  width: 200px;
-  margin: 0 0 0 -100px;
-  padding: 0;
-  text-align: center;
-  color: #ceaee8;
-  font-size: .8em;
-}
-
-p.check-mark a {
-  color: #a48bb9;
-}
-
-p.check-mark input {
-  border-radius: 0;
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  font-size: 2em;
-  color: #ceaee8;
-  outline: none;
+.form__box form button {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
+  color: #fff;
+  width: 90%;
+  margin: 13px auto;
+  font-family: arial;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: #000;
+  border: 1px solid #000;
 }
 
-p.check-mark label {
-  margin-left: 5px;
+.submit img {
+  width: 20px;
+  padding-right: 10px;
 }
-  </style>
-  
+</style>

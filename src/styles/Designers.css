@@ -343,14 +343,24 @@ font-weight: 500;
 }
 
 .designers__box{
-  max-width: 500px;
-  height: 320px;
+  max-width: 460px;
+  height: 310px;
+}
+
+.designers__box:hover{
+  background: linear-gradient(bottom rgb(0, 0, 0, 0.8));
 }
 
 .desiners__image img{
   width: 370px;
   height: 250px;
   border-radius: 7px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.designers__image  img:hover {
+  background: linear-gradient(to bottom, rgb(0, 0, 0), rgba(0, 0, 0, 0.8));
 }
 
 

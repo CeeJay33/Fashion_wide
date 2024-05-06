@@ -1,5 +1,6 @@
 <template>
   <LayOut>
+    <PopUp ref="popup" :isVisible="isShowing" @open="openPopup" @close="isShowing = false"/>
     <div class="designers__dection">
       <!-- flexing this area -->
       <div class="fashion__designers">
@@ -44,14 +45,15 @@
 
 <script>
 import LayOut from '@/layouts/LayOut.vue';
-import SponSor from '@/components/SponSor.vue';
+import PopUp from '@/components/popup/PopUp.vue';
+import { isAuthenticated } from '@/auth/auth';
 
 export default {
   name: "DesignerView",
 
   components: {
     LayOut,
-    SponSor
+    PopUp
   },
 
   data() {
@@ -59,12 +61,12 @@ export default {
       animateLikes: false,
       animateViews: false,
       designers: [],
-      likedKey: 'designer_liked' // Key to store liked status in local storage
+      likedKey: 'designer_liked', 
+      isShowing: false
     };
   },
 
   async mounted() {
-    // Fetch the initial likes count for the designer
     this.fetchLikesCount();
   },
 
@@ -86,16 +88,17 @@ export default {
       return formattedNumber;
     },
 
-    getTotalLikes(designerId) {
-      const designer = this.designers.find(d => d.uniqued === designerId);
-      return designer ? designer.likes : 0;
-    },
-
-    isLikedByUser(designerId) {
-      return localStorage.getItem(`${this.likedKey}_${designerId}`) === 'true';
-    },
+    openPopup() {
+    this.isShowing = true;
+  },
 
     async toggleLike(designerId) {
+      const authenticated = await isAuthenticated();
+      if (!authenticated) {
+        this.$refs.popup.openModal(); 
+        return; 
+      }
+
       const isLiked = this.isLikedByUser(designerId);
 
       if (isLiked) {
@@ -103,6 +106,15 @@ export default {
       } else {
         this.addLike(designerId);
       }
+    },
+
+    getTotalLikes(designerId) {
+      const designer = this.designers.find(d => d.uniqued === designerId);
+      return designer ? designer.likes : 0;
+    },
+
+    isLikedByUser(designerId) {
+      return localStorage.getItem(`${this.likedKey}_${designerId}`) === 'true';
     },
 
     async addLike(designerId) {

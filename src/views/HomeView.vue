@@ -1,5 +1,6 @@
 <template>
     <Layout>
+      <!-- <PopUp /> -->
   <div class="home__view">
   <section class="hero">
     <div class="home-container">
@@ -27,9 +28,10 @@ import Layout from '@/layouts/LayOut.vue';
 import TopDesigners from '@/components/TopDesigners.vue';
 import HowTip from '@/components/HowTip.vue';
 import DesCript from '@/components/DesCript.vue';
-import CarouSel from '@/components/CarouSel.vue';
+// import CarouSel from '@/components/CarouSel.vue';
 import SponSor from '@/components/SponSor.vue';
 import { isAuthenticated } from '@/auth/auth';
+// import PopUp from '@/components/popup/PopUp.vue';
 export default {
   name: "HomeView",
    components: {
@@ -37,7 +39,8 @@ export default {
      TopDesigners,
      HowTip,
      DesCript,
-     CarouSel,
+    //  PopUp,
+    //  CarouSel,
      SponSor
    },
 
