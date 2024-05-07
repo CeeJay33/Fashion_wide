@@ -1,16 +1,18 @@
 <template>
     <div>
       <div class="search__bar">
-        <input type="text" placeholder="Search..." v-model="searchQuery" @input="search" @keydown.enter="redirectIfSingleResult" @click="showSuggestions = true">
+        <input type="text" placeholder="Search..." v-model="searchQuery" @keyup="search" @keydown.enter="redirectIfSingleResult" @click="showSuggestions = true">
         <img :src="require('@/assets/search-interface-symbol_54481.png')" alt="Search Icon" @click="search">
-      </div>
-      <div class="suggestions" v-show="showSuggestions && filteredResults.length > 0">
+      
+      <div class="suggestions" v-show="showSuggestions && searchResults.length > 0">
         <ul>
-          <li v-for="(result, index) in filteredResults" :key="index" @click="selectSuggestion(result)">
+          <li v-for="result in searchResults" :key="result.uniqued" @click="selectSuggestion(result)">
             {{ result.company_name }}
           </li>
         </ul>
+        <p v-if="showNoResults && searchResults.length === 0">No result found</p>
       </div>
+    </div>
     </div>
   </template>
   
@@ -23,39 +25,28 @@
       return {
         searchQuery: '',
         searchResults: [],
-        showSuggestions: false
+        showSuggestions: false,
+        showNoResults: false
       };
-    },
-    computed: {
-      filteredResults() {
-        if (!this.searchQuery.trim()) return [];
-        return this.searchResults.filter(result => {
-          return result.company_name.toLowerCase().includes(this.searchQuery.toLowerCase());
-        }).slice(0, 5);
-      }
     },
     methods: {
       async search() {
         this.showSuggestions = true;
         if (this.searchQuery.trim() === '') {
           this.searchResults = [];
+          this.showNoResults = false;
           return;
         }
         this.searchResults = await this.fetchSearchResultsFromDatabase(this.searchQuery);
+        this.showNoResults = this.searchResults.length === 0;
       },
       async fetchSearchResultsFromDatabase(query) {
-  const response = await axios.get(`http://localhost:80/Fashion2/Fashion/Searching.php?q=${query}`);
-  if (Array.isArray(response.data)) {
-    return response.data.filter(result => result.company_name.toLowerCase().includes(query.toLowerCase()));
-  } else {
-    return [];
-  }
-},
-
+        const response = await axios.get(`http://localhost:80/Fashion2/Fashion/Searching.php?q=${query}`);
+        return response.data;
+      },
       redirectIfSingleResult() {
-        if (this.filteredResults.length === 1) {
-          this.searchQuery = this.filteredResults[0].company_name;
-          this.$router.push({ name: 'SearchDetails', params: { name: this.filteredResults[0].company_name } });
+        if (this.searchResults.length === 1) {
+          this.$router.push({ name: 'SearchDetails', params: { name: this.searchResults[0].company_name } });
           this.showSuggestions = false;
         }
       },

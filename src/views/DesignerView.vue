@@ -1,6 +1,6 @@
 <template>
   <LayOut>
-    <PopUp ref="popup" :isVisible="isShowing" @open="openPopup" @close="isShowing = false"/>
+    <PopUp ref="popup" :isVisible="isShowing" @open="openPopup" @close="isShowing = false" />
     <div class="designers__dection">
       <!-- flexing this area -->
       <div class="fashion__designers">
@@ -21,17 +21,18 @@
             <div class="designer__profile__likes">
               <div class="flex__area">
                 <div class="likes">
-                  <i class="fas fa-heart" 
-                     :class="{ 'fa-hearts': isLikedByUser(designer.uniqued), 'liked': isLikedByUser(designer.uniqued) }" 
-                     @click="toggleLike(designer.uniqued)">
+                  <i class="fas fa-heart"
+                    :class="{ 'fa-heart': !isLikedByUser(designer.uniqued), 'fa-hearts': isLikedByUser(designer.uniqued), 'liked': isLikedByUser(designer.uniqued) }"
+                    @click="toggleLike(designer.uniqued)">
                   </i>
-                  <span :class="{ 'animate-up': animateLikes }">{{ formatNumber(getTotalLikes(designer.uniqued), 'likes') }}</span>
+                  <span :class="{ 'animate-up': animateLikes }">{{ formatNumber(getTotalLikes(designer.uniqued),
+                    'likes') }}</span>
                 </div>
               </div>
               <div class="designer__profile__views">
                 <div class="views">
-                  <i class="fas fa-eye"></i>
-                  <span :class="{ 'animate-up': animateViews }">{{ formatNumber(52000000, 'views') }}</span>
+                  <i class="fas fa-eye" ></i>
+                  <span :class="{ 'animate-up': animateViews }">{{ formatNumber(500, 'views') }}</span>
                 </div>
               </div>
             </div>
@@ -61,7 +62,7 @@ export default {
       animateLikes: false,
       animateViews: false,
       designers: [],
-      likedKey: 'designer_liked', 
+      likedKey: 'designer_liked',
       isShowing: false
     };
   },
@@ -89,14 +90,14 @@ export default {
     },
 
     openPopup() {
-    this.isShowing = true;
-  },
+      this.isShowing = true;
+    },
 
     async toggleLike(designerId) {
       const authenticated = await isAuthenticated();
       if (!authenticated) {
-        this.$refs.popup.openModal(); 
-        return; 
+        this.$refs.popup.openModal();
+        return;
       }
 
       const isLiked = this.isLikedByUser(designerId);
@@ -104,7 +105,7 @@ export default {
       if (isLiked) {
         this.removeLike(designerId);
       } else {
-        this.addLike(designerId);
+        this.addLike(designerId).add;
       }
     },
 
@@ -169,8 +170,8 @@ export default {
 <style>
 @import url("@/styles/Designers.css");
 
-.animate-up {
-  animation: slide-up 0.5s;
+.likes {
+  animation: slide-up 0.8s;
 }
 
 @keyframes slide-up {
@@ -178,13 +179,40 @@ export default {
     transform: translateY(10px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
-.liked {
-  color: red; 
+.fa-heart, .fa-hearts {
+  transition: color 0.1s ease;
 }
+
+.views{
+  animation: slide 0.8s;
+}
+
+.fa-eye{
+  animation: slide 0.8s;
+}
+
+.liked {
+  color: red;
+  animation: slide 0.8s;
+}
+
+@keyframes slide {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 </style>

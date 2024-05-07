@@ -407,7 +407,6 @@ font-weight: 500;
 }
 
 .designer__profile__likes i{
-  color: #ccc;
   padding: 0;
   margin: 0;
   font-size: 15px;
@@ -427,17 +426,17 @@ font-weight: 500;
   align-items: center;
 }
 
+.views i{
+  color: #ccc;
+}
+
 .fa-heart:hover{
   color: red;
 }
 
-
-.fa-hearts{
-  color: red;
+.fa-heart{
+  color: #ccc;
 }
-
-
-
 
 
 
