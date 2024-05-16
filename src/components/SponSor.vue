@@ -1,10 +1,13 @@
 <template>
+  <div class="sponsor">
+    <h2>Sponsors</h2>
     <div class="marquee">
       <div class="track" ref="track" :style="{ animation: animationStyle }">
         <div class="content">
           <img v-for="(item, index) in duplicatedItems" :key="index" :src="getImageUrl(item)" class="image__content" />
         </div>
       </div>
+    </div>
     </div>
   </template>
   
@@ -55,10 +58,16 @@
   </script>
   
   <style>
+  .sponsor h2{
+    font-size: 34px;
+    font-weight: 600;
+    margin-top: 3rem;
+    padding: 2rem 4rem;
+  }
   .marquee {
     max-width: 100%;
     overflow: hidden;
-    margin: 3rem 0;
+    margin: 1rem 0;
   }
   
   .track {

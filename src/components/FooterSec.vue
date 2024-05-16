@@ -20,7 +20,7 @@
 
         <div class="col">
             <h4>About</h4>
-            <a><router-link to="/about">About Us</router-link></a>
+            <a><router-link to="/learnMore">About Us</router-link></a>
             <a href="#">Delivery information</a>
             <a href="#">Privacy</a>
             <a href="#">Terms & Condition</a>

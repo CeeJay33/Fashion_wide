@@ -1,10 +1,9 @@
 .main__hero__section{
     display: flex;
     justify-content: space-around;
-    margin-top: 2rem;
     padding: 2rem 0;
     height: 70vh;
-    /* background-color: #fff; */
+    background-color: #fff; 
 }
 .hero__descript{
     width: 100%;
@@ -13,13 +12,14 @@
 }
 
 .hero__descript .span{
+    font-size: 16px;
     font-family: arial;
     font-weight: 600;
     color: #5161ce;
 }
 .main__hero__section .hero__descript h1{
     font-size: 55px;
-    font-family: arial;
+    font-family: "Roboto Serif", "Montserrat Alternates", serif;
     padding: 0.8rem 3rem;
     font-weight: 500;
     text-align: center;
@@ -59,7 +59,7 @@
 }
 
 .descriptionn{
-    padding: 0 3rem;
+    padding: 2rem 3rem;
     background-color: #fff;
 }
 

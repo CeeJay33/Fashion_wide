@@ -8,7 +8,7 @@
       <h1 class="hero__heading">Connect with the world’s Fashion Designers.</h1>
       <div class="home-type-body-large font-weight-500">Connect with a community of millions of top-rated designers
         &amp; agencies around the world.</div>
-      <button class="margin-t-32 btn2 btn2--large" data-track-cta="Start hiring">Start hiring today</button>
+      <button class="margin-t-32 btn2 btn2--large" data-track-cta="Start hiring">Start hiring</button>
     </div>
   </section>
 
@@ -30,7 +30,7 @@ import HowTip from '@/components/HowTip.vue';
 import DesCript from '@/components/DesCript.vue';
 // import CarouSel from '@/components/CarouSel.vue';
 import SponSor from '@/components/SponSor.vue';
-import { isAuthenticated } from '@/auth/auth';
+// import { isAuthenticated } from '@/auth/auth';
 // import PopUp from '@/components/popup/PopUp.vue';
 export default {
   name: "HomeView",
@@ -45,12 +45,12 @@ export default {
    },
 
    async mounted(){
-   const authenticated = await isAuthenticated();
-            if (authenticated) {
+  //  const authenticated = await isAuthenticated();
+            // if (authenticated) {
               this.$router.push('/dashboard');
-            } else {
+            // } else {
                 this.$router.push('/');
-            }
+            // }
    },
 };
 

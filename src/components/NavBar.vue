@@ -1,18 +1,8 @@
 <template>
+    <div v-if="!isMobile">
     <nav ref="navbar" class="navbar navbar-expand-custom navbar-mainbg">
       <img :src="require('@/assets/hmm-removebg-preview.png')" class="barr" alt="">
-      <div class="search__bar">
-        <input type="text" placeholder="Search..." v-model="searchQuery" @keyup="search" @keydown.enter="redirectIfSingleResult" @click="showSuggestions = true">
-        <img :src="require('@/assets/search-interface-symbol_54481.png')" alt="Search Icon" v-on:click="redirectIfSingleResult">
       
-      <div class="suggestions" v-show="showSuggestions && Array.isArray(searchResults) && searchResults.length > 0">
-        <ul>
-          <li v-for="result in searchResults" :key="result.uniqued" @click="selectSuggestion(result)">
-            {{ result.company_name }}
-          </li>
-        </ul>
-      </div>
-    </div>
       <transition name="navbar-collapse">
         <div class="collapse navbar-collapse" v-show="isNavbarOpen" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
@@ -25,14 +15,41 @@
           </ul>
         </div>
       </transition>
+
+      <div class="search__bar">
+        <input type="search" placeholder="Search..." v-model="searchQuery" @keyup="search" @keydown.enter="redirectIfSingleResult" @click="showSuggestions = true">
+        <img :src="require('@/assets/search-interface-symbol_54481.png')" alt="Search Icon" v-on:click="redirectIfSingleResult">
+      
+      <div class="suggestions" v-show="showSuggestions && Array.isArray(searchResults) && searchResults.length > 0">
+        <ul>
+          <li v-for="result in searchResults" :key="result.uniqued" @click="selectSuggestion(result)">
+            {{ result.company_name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ProfileSuggest/>
     </nav>
+  </div>
+
+  <div v-else>
+    <MobileNavigation/>
+  </div>
   </template>
   
   <script>
   import axios from 'axios';
+  import ProfileSuggest from './ProfileSuggest.vue';
+  import MobileNavigation from './screensizes/MobileNavigation.vue';
   export default {
+    components: {
+      ProfileSuggest,
+      MobileNavigation
+    },
     data() {
       return {
+        isMobile: false,
         searchQuery: '',
         searchResults: [],
         showSuggestions: false,
@@ -60,6 +77,13 @@
           this.updateHoriSelector();
         });
       },
+
+      // for checking screen size
+
+      checkScreenSize() {
+        this.isMobile = window.innerWidth < 768;
+
+            },
 
       async search() {
         this.showSuggestions = true;
@@ -110,12 +134,15 @@
       }
     },
     mounted() {
-      this.updateHoriSelector();
-      window.addEventListener('resize', this.updateHoriSelector);
+   
+      this.checkScreenSize();
+      window.removeEventListener('resize', this.checkScreenSize);
     },
-    unmounted() {
+  
+    beforeUnmount(){
       window.removeEventListener('resize', this.updateHoriSelector);
     }
+
   };
   </script>
 

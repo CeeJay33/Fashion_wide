@@ -22,10 +22,12 @@
           <div class="submit">
             <button ><img :src="require('@/assets/vecteezy_colourful-google-logo-in-dark-background_13760951-removebg-preview.png')" alt=""> Continue with Google</button>
           </div>
-        </form>
-        <div class="ssubmit">
+
+          <!-- <div class="ssubmit">
             <button >Sign In as Designer</button>
-          </div>
+          </div> -->
+        </form>
+       
         <div class="Forgot">
           <router-link to="">
             <p>Forgot Password</p>
@@ -142,6 +144,19 @@ export default {
   box-shadow: 0 10px 20px 30px rgba(0, 0, 0, 0.01);
   background-color: #fffffff1;
   z-index: 9999;
+  animation: slide-up 0.5s;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .form__box .fa-x {
@@ -177,8 +192,8 @@ export default {
   padding: 0 15px;
     border-radius: 20px;
     outline: none;
-    border: 1px solid #e8e8e8;
-    font-size: 16px;
+    border: 1px solid #f9f9f9;
+    font-size: 15px;
     font-weight: 400;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   border-top: none;

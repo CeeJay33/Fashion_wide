@@ -14,14 +14,14 @@
               <div class="image"><img src="http://localhost:80/Fashion2/Fashion/uploads/ve688891266-244oak-002-1600886450.jpg" alt=""></div>
               <div class="image"><img src="http://localhost:80/Fashion2/Fashion/uploads/FULL-LENGTH-2-904x1356.jpeg" alt=""></div>
               <div class="image"><img src="http://localhost:80/Fashion2/Fashion/uploads/d816f463bdef6a6bbce2df6058d82567.jpg" alt=""></div>
+              <div class="image"><img src="http://localhost:80/Fashion2/Fashion/uploads/IMG-20230529-WA0044.jpg" alt=""></div>
+              <div class="image"><img src="http://localhost:80/Fashion2/Fashion/uploads/IMG-20230529-WA0040.jpg" alt=""></div>
             </div>
             <div class="social">
               <div class='Message'>
-                <p><a href='https://wa.me/09049463806' target='_blank'>WhatsApp</a></p>
+                <p><a href='https://wa.me/09049463806' target='_blank'>See More</a></p>
               </div>
-              <div class='call'>
-                <p><a href='tel:09049463806'>Phone Number</a></p>
-              </div>
+            
             </div>
           </div>
         </div>

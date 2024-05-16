@@ -19,6 +19,8 @@ import DesignerSection from '@/views/DesignerSection.vue';
 import PopUp from '@/components/popup/PopUp.vue';
 import DemoSeach from '@/components/DemoSeach.vue';
 import SearcHed from '@/components/SearcHed.vue';
+import ProfileSuggest from '@/components/ProfileSuggest.vue';
+import MobileNavigation from '@/components/screensizes/MobileNavigation.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -62,6 +64,12 @@ const router = createRouter({
         },
 
         {
+            path: '/profile',
+            component: ProfileSuggest,
+            meta: { requiresAuth: false }
+        },
+
+        {
             path: '/learnMore',
             component: LearnMore,
             meta: { requiresAuth: false }
@@ -94,6 +102,12 @@ const router = createRouter({
         {
             path: '/pop-up',
             component: PopUp,
+            meta: { requiresAuth: false }
+        },
+
+        {
+            path: '/mobile',
+            component: MobileNavigation,
             meta: { requiresAuth: false }
         },
 
