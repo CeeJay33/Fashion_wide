@@ -1,99 +1,83 @@
  body{
-    background-color: #f4f5f1f1;
+    background-color: #fff;
  }
 
 
-.hero{
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    height: 80vh;
-    text-align: center;
-    background-color: #fff;
-    background-repeat: no-repeat;
-    /* background: linear-gradient(rgb(255, 255, 255), rgba(227, 227, 227, 0.075)), url(@/assets/freestocks-_3Q3tsJ01nc-unsplash.jpg); */
-    background-size: cover;
-    
-  }
-  .home-badge{
-    width: 40%;
-    margin: auto;
-    padding: 10px 0;
-    border-radius: 30px;
-    color: #000;
-    
-  }
-
-  .hero__heading{
-    font-size: 66px;
-    font-family: "Roboto Serif", "Montserrat Alternates", serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-variation-settings:
-      "wdth" 100,
-      "GRAD" 0;
-    font-weight: 500;
-    width: 80%;
-    line-height: 76px;
-    margin: auto;
-    padding: 10px 0;
-    color: #000;
-
-  }
-
-  .home-type-body-large{
-    padding: 5px 0;
-    display: none;
-    font-size: 19px;
-  }
-
-.home-container{
-  margin-bottom: 3rem;
+ .hero{
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  height: 90vh;
+  text-align: center;
+  margin: 0.5rem auto;
+  background-color: #fff;
+  
+}
+.home-badge{
+  width: 40%;
+  margin: auto;
+  padding: 10px 0;
+  border-radius: 30px;
+  color: #5161ce;
 }
 
+.hero__heading{
+  font-size: 55px;
+  font-family: "Roboto Serif", "Montserrat Alternates", serif;
+  font-weight: 500;
+  width: 80%;
+  line-height: 70px;
+  margin: auto;
+  padding: 10px 0;
+}
 
-  .margin-t-32 {
-    text-decoration: none;
-    color: #fff;
-    background-color: #5161ce;
-    padding: 20px 0;
-    width: 160px;
-    margin-top: 20px;
-    border-radius: 30px;
-    border: 1px solid #5161ce;
-    font-weight: 600;
-    cursor: pointer;
+.home-type-body-large{
+  padding: 5px 0;
+  font-size: 18px;
+  font-family: arial;
+}
 
+.margin-t-32 {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  background-color: #5161ce;
+  padding: 20px 0;
+  width: 160px;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 30px;
+  border: none;
 
-  }
+}
 
   /* responsive style for hero section */
 
   @media (max-width:499px){
+    body{
+      background-color: #fff;
+    }
     .hero{
       display: flex;
       align-items: center;
       /* justify-content: center; */
-      height: 65vh;
+      height: 80vh;
       text-align: center;
-      background-color: #f4f5f1f1;
       
     }  
     .home-badge {
       width: 80%;
-      margin: auto;
       padding: 10px 0;
       border-radius: 30px;
   }
 
   .hero__heading {
-    font-size: 50px;
-    font-family: arial;
-    font-weight: 600;
-    width: 100%;
+    font-size: 45px;
+     font-family: "Roboto Serif", "Montserrat Alternates", serif; 
+    font-weight: 500;
+    width: 90%;
     line-height: 60px;
-    margin: auto;
-    padding: 10px 0;
+    padding: 10px 20px;
 }
 
   }

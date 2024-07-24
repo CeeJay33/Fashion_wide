@@ -8,7 +8,7 @@ import HomeView from '@/views/HomeView.vue';
 import AboutView from '@/views/AboutView.vue';
 import DashBoard from '@/views/DashBoard.vue';
 import DetailsPage from '@/views/DetailsPage.vue';
-import SignIn from '@/components/signin/SignIn.vue';
+import Sec_Siginin from '@/components/signin/Sec_Signin.vue';
 import RegisterCus from '@/components/register/RegisterCus.vue';
 import VeriFication from '@/components/verify/VeriFication.vue';
 import ContactView from '@/views/ContactView.vue';
@@ -21,7 +21,7 @@ import DemoSeach from '@/components/DemoSeach.vue';
 import SearcHed from '@/components/SearcHed.vue';
 import ProfileSuggest from '@/components/ProfileSuggest.vue';
 import MobileNavigation from '@/components/screensizes/MobileNavigation.vue';
-
+import ToogleButton from '@/components/toogle_button/ToogleButton.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -46,27 +46,27 @@ const router = createRouter({
         {
             path: '/dashboard',
             component: DashBoard,
-            meta: { requiresAuth: true }
+            meta: { requiresAuth:  true }
         },
 
         {
             path: '/details/:id',
             component: DetailsPage,
             name: 'DesignerDetails',
-            meta: { requiresAuth: true }
+            meta: { requiresAuth:  false }
         },
 
         {
             path: '/search/:name',
             component: SearcHed,
             name: 'SearchDetails',
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
         {
             path: '/profile',
             component: ProfileSuggest,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
         {
@@ -78,37 +78,44 @@ const router = createRouter({
         {
             path: '/fashion-designers',
             component: DesignerView,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false }
+        },
+
+
+        {
+            path: '/toogle',
+            component: ToogleButton,
+            meta: { requiresAuth:  false}
         },
 
         {
             path: '/sign-in-customer',
-            component: SignIn,
-            meta: { requiresAuth: false }
+            component: Sec_Siginin,
+            meta: { requiresAuth:  false}
         },
 
         {
             path: '/designer-detail-section',
             component: DesignerSection,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
         {
             path: '/register-customer',
             component: RegisterCus,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
         {
             path: '/pop-up',
             component: PopUp,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
         {
             path: '/mobile',
             component: MobileNavigation,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
 
@@ -116,14 +123,14 @@ const router = createRouter({
         {
             path: '/verify-cus',
             component: VeriFication,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
 
         
         {
             path: '/demo-search',
             component: DemoSeach,
-            meta: { requiresAuth: false }
+            meta: { requiresAuth:  false}
         },
     ]
 });

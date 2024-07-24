@@ -51,13 +51,13 @@ export default {
       try {
         const Res = await axios({
           method: 'post',
-          url: 'http://localhost:80/Fashion2/Fashion/ProgramVerifyC.php',
+          url: 'http://localhost:80/SignUpClassesPhp/Verify',
           withCredentials: true,
           data: {
             otp: this.otp.join('')
           },
           headers: {
-            "content-type": "application/x-www-form-urlencoded"
+            "content-type": "application/json"
           }
         });
         this.responseData = Res.data;

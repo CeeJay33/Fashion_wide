@@ -1,48 +1,47 @@
 <template>
-    <Layout>
+  <NavBar :isDark="isDark" @toggle="handleToggle"/>
       <!-- <PopUp /> -->
   <div class="home__view">
-  <section class="hero">
-    <div class="home-container">
-      <div class="home-badge home-badge--color-cycle">Over 3 million ready-to-work creatives in our community!</div>
-      <h1 class="hero__heading">Connect with the world’s Fashion Designers.</h1>
-      <div class="home-type-body-large font-weight-500">Connect with a community of millions of top-rated designers
-        &amp; agencies around the world.</div>
-      <button class="margin-t-32 btn2 btn2--large" data-track-cta="Start hiring">Start hiring</button>
-    </div>
-  </section>
-
+    <HowTip :isDark="isDark"/> 
+    <TopDesigners />
   <DesCript/>
-
-  <TopDesigners />
-  <CarouSel/>
-  <HowTip/>
+    <HomeDesigners/>
+  
 
   <SponSor/>
   </div>
-</Layout>
 </template>
 
 <script>
-import Layout from '@/layouts/LayOut.vue';
+// import Layout from '@/layouts/LayOut.vue';
 import TopDesigners from '@/components/TopDesigners.vue';
+import NavBar from '@/components/NavBar.vue';
 import HowTip from '@/components/HowTip.vue';
 import DesCript from '@/components/DesCript.vue';
 // import CarouSel from '@/components/CarouSel.vue';
 import SponSor from '@/components/SponSor.vue';
 // import { isAuthenticated } from '@/auth/auth';
 // import PopUp from '@/components/popup/PopUp.vue';
+import HomeDesigners from '@/components/HomeDesigners.vue';
 export default {
   name: "HomeView",
    components: {
-     Layout,
+    //  Layout,
+      NavBar,
      TopDesigners,
      HowTip,
      DesCript,
     //  PopUp,
     //  CarouSel,
-     SponSor
+     SponSor,
+     HomeDesigners
    },
+
+   data() {
+    return {
+      isDark: false
+    };
+  },
 
    async mounted(){
   //  const authenticated = await isAuthenticated();
@@ -52,6 +51,12 @@ export default {
                 this.$router.push('/');
             // }
    },
+
+   methods: {
+    handleToggle(isDark) {
+      this.isDark = isDark;
+    }
+  }
 };
 
 </script>
@@ -59,4 +64,7 @@ export default {
 
 <style scoped lang="css">
 @import url("../styles/style.css");
+
+
+
 </style>

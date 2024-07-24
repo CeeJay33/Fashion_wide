@@ -3,7 +3,7 @@ import axios from "axios";
 
 export async function isAuthenticated() {
     try {
-        const response = await axios.get("http://localhost:80/Fashion2/Fashion/checkAuth.php", {
+        const response = await axios.get("http://localhost:80/SignUpClassesPhp/CheckAuth", {
             withCredentials: true,
         });
         return response.data.isAuthenticated === true;

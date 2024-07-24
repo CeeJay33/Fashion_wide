@@ -1,5 +1,6 @@
 <template>
   <div class="designers__section">
+    <!-- <h2>#Top Rated Designers</h2> -->
     <div class="marquee">
       <div class="track" ref="track">
         <div class="content">
@@ -14,11 +15,10 @@
               </video>
             </template>
             <div class="des">
-              <span><i class="fa fa-eye"></i> 39k Views</span>
+              <span><i class="fa fa-eye"></i> {{ formatNumber(designer.likes) }} likes</span>
               <h5>{{ designer.company_name }}</h5>
               <h4>Fashion Designs</h4>
             </div>
-            <button title="View-Details" @click="ccc"><i class="fa fa-eye cart"></i></button>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default {
     }
   },
   async mounted() {
-    let response = await axios.get('https://8tvxfmpq-80.uks1.devtunnels.ms/Fashion2/Fashion/info.php')
+    let response = await axios.get('http://localhost:80/Fashion2/Fashion/info.php')
     this.designers = response.data
     this.startAnimation();
   },
@@ -51,13 +51,13 @@ export default {
   },
   methods: {
     getImageUrl(item) {
-      return item.startsWith("http") ? item : `https://8tvxfmpq-80.uks1.devtunnels.ms/Fashion2/Fashion/${item}`;
+      return item.startsWith("http") ? item : `http://localhost:80/Fashion2/Fashion/${item}`;
     },
     isImage(filePath) {
       return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(filePath);
     },
     isVideo(filePath) {
-      return /\.(mp4|webm|ogg)$/i.test(filePath);
+      return /\.(mp4|mov|webm|ogg)$/i.test(filePath);
     },
     showDetails(uniqued) {
       this.$router.push({ name: 'DesignerDetails', params: { id: uniqued } });
@@ -73,7 +73,25 @@ export default {
     stopAnimation() {
       const content = this.$refs.track.querySelector(".content");
       content.style.animation = "none";
-    }
+    },
+
+
+    formatNumber(number) {
+      if (typeof number !== 'number' || isNaN(number)) {
+        return '';
+      }
+
+      let formattedNumber = '';
+      if (number >= 1000000) {
+        formattedNumber = (number / 1000000).toFixed(1) + 'M';
+      } else if (number >= 1000) {
+        formattedNumber = (number / 1000).toFixed(0) + 'k';
+      } else {
+        formattedNumber = number.toString();
+      }
+
+      return formattedNumber;
+    },
   }
 };
 </script>
@@ -83,5 +101,13 @@ export default {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
   /* animation-iteration-count: infinite; Make the animation repeat infinitely */
+}
+
+.designers__section h2{
+  font-size: 30px;
+  font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    margin-top: 3rem;
+    padding: 2rem 4rem;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div v-if="!isMobile">
-    <nav ref="navbar" class="navbar navbar-expand-custom navbar-mainbg">
+  <div v-if="!isMobile">
+    <nav ref="navbar" class="navbar navbar-expand-custom navbar-mainbg" :class="{ 'navbar-dark': isDark }">
       <img :src="require('@/assets/hmm-removebg-preview.png')" class="barr" alt="">
       
       <transition name="navbar-collapse">
@@ -20,133 +20,157 @@
         <input type="search" placeholder="Search..." v-model="searchQuery" @keyup="search" @keydown.enter="redirectIfSingleResult" @click="showSuggestions = true">
         <img :src="require('@/assets/search-interface-symbol_54481.png')" alt="Search Icon" v-on:click="redirectIfSingleResult">
       
-      <div class="suggestions" v-show="showSuggestions && Array.isArray(searchResults) && searchResults.length > 0">
-        <ul>
-          <li v-for="result in searchResults" :key="result.uniqued" @click="selectSuggestion(result)">
-            {{ result.company_name }}
-          </li>
-        </ul>
+        <div class="suggestions" v-show="showSuggestions && Array.isArray(searchResults) && searchResults.length > 0">
+          <ul>
+            <li v-for="result in searchResults" :key="result.uniqued" @click="selectSuggestion(result)">
+              {{ result.company_name }}
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <ProfileSuggest/>
+      <ToogleButton :isDark="isDark" @toggle="handleToggle"/>
+      <div v-if="isAuthenticated">
+         <ProfileSuggest/>
+      </div>
+      <div v-else>
+       <button> <router-link to="/register-customer"> sign up</router-link></button>
+      </div>
     </nav>
   </div>
 
   <div v-else>
     <MobileNavigation/>
   </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  import ProfileSuggest from './ProfileSuggest.vue';
-  import MobileNavigation from './screensizes/MobileNavigation.vue';
-  export default {
-    components: {
-      ProfileSuggest,
-      MobileNavigation
+</template>
+
+<script>
+import axios from 'axios';
+import ProfileSuggest from './ProfileSuggest.vue';
+// import ToogleButton from './toogle_button/ToogleButton.vue';
+import MobileNavigation from './screensizes/MobileNavigation.vue';
+import { isAuthenticated } from '@/auth/auth';
+
+export default {
+  props: {
+    isDark: {
+      type: Boolean,
+      default: false
+    }
+  },
+  components: {
+    ProfileSuggest,
+    MobileNavigation,
+    // ToogleButton
+  },
+  data() {
+    return {
+      isMobile: false,
+      searchQuery: '',
+      searchResults: [],
+      showSuggestions: false,
+      isAuthenticated: false,
+      isNavbarOpen: true,
+      items: [
+        { label: 'HomePage', icon: 'fas fa-tachometer-alt', route: '/' },
+        { label: 'Learn More', icon: 'far fa-chart-bar', route: '/learnMore' },
+        { label: 'Contact Us', icon: 'fas fa-phone', route: '/contact-us' },
+        { label: 'Find Designers', icon: 'far fa-calendar-alt', route: '/fashion-designers' },
+        { label: 'Go Pro', icon: 'far fa-copy', route: '/sign-in-customer' }
+      ]
+    };
+  },
+  methods: {
+    toggleNavbar() {
+      this.isNavbarOpen = !this.isNavbarOpen;
+      this.$nextTick(() => this.updateHoriSelector());
     },
-    data() {
-      return {
-        isMobile: false,
-        searchQuery: '',
-        searchResults: [],
-        showSuggestions: false,
-        isNavbarOpen: true,
-        items: [
-          { label: 'HomePage', icon: 'fas fa-tachometer-alt', route: '/' },
-          { label: 'Learn More', icon: 'far fa-chart-bar', route: '/learnMore' },
-          { label: 'Contact Us', icon: 'fas fa-phone', route: '/contact-us' },
-          { label: 'Find Designers', icon: 'far fa-calendar-alt', route: '/fashion-designers' },
-          { label: 'Sign In', icon: 'far fa-copy', route: '/sign-in-customer' }
-        ]
-      };
+
+      async checkAuthentication() {
+
+     const authenticated = await isAuthenticated();
+             if (authenticated) {
+                 this.isAuthenticated = true
+             } else {
+                 this.isAuthenticated = false
+             }
+
+      },
+    
+
+    handleToggle(isDark) {
+      this.$emit('toggle', isDark);
     },
-    methods: {
-      toggleNavbar() {
-        this.isNavbarOpen = !this.isNavbarOpen;
-        this.$nextTick(() => this.updateHoriSelector());
-      },
-      setActive(activeItem) {
-        if (activeItem.route === '/') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-  
-        this.$nextTick(() => {
-          this.updateHoriSelector();
-        });
-      },
+    setActive(activeItem) {
+      if (activeItem.route === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
 
-      // for checking screen size
-
-      checkScreenSize() {
-        this.isMobile = window.innerWidth < 768;
-
-            },
-
-      async search() {
-        this.showSuggestions = true;
-        if (this.searchQuery.trim() === '') {
-          this.searchResults = [];
-          return;
-        }
-        this.searchResults = await this.fetchSearchResultsFromDatabase(this.searchQuery);
-      },
-      async fetchSearchResultsFromDatabase(query) {
-        const response = await axios.get(`http://localhost:80/Fashion2/Fashion/Searching.php?q=${query}`);
-        return response.data;
-      },
-      redirectIfSingleResult() {
-        if (this.searchResults.length === 1) {
-          this.$router.push({ name: 'SearchDetails', params: { name: this.searchResults[0].company_name } });
-          this.showSuggestions = false;
-          setTimeout(() => {
-    window.location.reload(); // Reload the page after a delay (e.g., 500 milliseconds)
-  }, 1000);
-        }
-      },
-      selectSuggestion(result) {
-  this.searchQuery = result.company_name;
-  this.$router.push({ name: 'SearchDetails', params: { name: result.company_name } });
-  this.showSuggestions = false;
-  setTimeout(() => {
-    window.location.reload(); // Reload the page after a delay (e.g., 500 milliseconds)
-  }, 1000); // Adjust the delay time as needed
-},
-
-
-
-
-      updateHoriSelector() {
-        const tabsNewAnim = this.$refs.navbar;
-        const activeItemNewAnim = tabsNewAnim.querySelector('.nav-item.active');
-        if (!activeItemNewAnim) return;
-        const itemPosNewAnimTop = activeItemNewAnim.offsetTop - tabsNewAnim.offsetTop;
-        const itemPosNewAnimLeft = activeItemNewAnim.offsetLeft - tabsNewAnim.offsetLeft;
-        const activeWidthNewAnimHeight = activeItemNewAnim.offsetHeight;
-        const activeWidthNewAnimWidth = activeItemNewAnim.offsetWidth;
-        const horiSelector = tabsNewAnim.querySelector('.hori-selector');
-        horiSelector.style.top = itemPosNewAnimTop + 'px';
-        horiSelector.style.left = itemPosNewAnimLeft + 'px';
-        horiSelector.style.height = activeWidthNewAnimHeight + 'px';
-        horiSelector.style.width = activeWidthNewAnimWidth + 'px';
+      this.$nextTick(() => {
+        this.updateHoriSelector();
+      });
+    },
+    checkScreenSize() {
+      this.isMobile = window.innerWidth < 768;
+    },
+    async search() {
+      this.showSuggestions = true;
+      if (this.searchQuery.trim() === '') {
+        this.searchResults = [];
+        return;
+      }
+      this.searchResults = await this.fetchSearchResultsFromDatabase(this.searchQuery);
+    },
+    async fetchSearchResultsFromDatabase(query) {
+      const response = await axios.get(`http://localhost:80/Fashion2/Fashion/Searching.php?q=${query}`);
+      return response.data;
+    },
+    redirectIfSingleResult() {
+      if (this.searchResults.length === 1) {
+        this.$router.push({ name: 'SearchDetails', params: { name: this.searchResults[0].company_name } });
+        this.showSuggestions = false;
+        setTimeout(() => {
+          window.location.reload(); 
+        }, 1000);
       }
     },
-    mounted() {
-   
-      this.checkScreenSize();
-      window.removeEventListener('resize', this.checkScreenSize);
+    selectSuggestion(result) {
+      this.searchQuery = result.company_name;
+      this.$router.push({ name: 'SearchDetails', params: { name: result.company_name } });
+      this.showSuggestions = false;
+      setTimeout(() => {
+        window.location.reload(); 
+      }, 1000); 
     },
-  
-    beforeUnmount(){
-      window.removeEventListener('resize', this.updateHoriSelector);
+    updateHoriSelector() {
+      const tabsNewAnim = this.$refs.navbar;
+      const activeItemNewAnim = tabsNewAnim.querySelector('.nav-item.active');
+      if (!activeItemNewAnim) return;
+      const itemPosNewAnimTop = activeItemNewAnim.offsetTop - tabsNewAnim.offsetTop;
+      const itemPosNewAnimLeft = activeItemNewAnim.offsetLeft - tabsNewAnim.offsetLeft;
+      const activeWidthNewAnimHeight = activeItemNewAnim.offsetHeight;
+      const activeWidthNewAnimWidth = activeItemNewAnim.offsetWidth;
+      const horiSelector = tabsNewAnim.querySelector('.hori-selector');
+      horiSelector.style.top = itemPosNewAnimTop + 'px';
+      horiSelector.style.left = itemPosNewAnimLeft + 'px';
+      horiSelector.style.height = activeWidthNewAnimHeight + 'px';
+      horiSelector.style.width = activeWidthNewAnimWidth + 'px';
     }
+  },
+  mounted() {
+    this.checkScreenSize();
+    window.addEventListener('resize', this.checkScreenSize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.checkScreenSize);
+  },
+    async created() {
+    await this.checkAuthentication(); 
+  }
+};
+</script>
 
-  };
-  </script>
+<style scoped lang="css">
+@import url("@/styles/navbar.css");
+@import url( "@/styles/IsDarkForAll.css");
 
-  <style scoped lang="css">
-  @import url("@/styles/navbar.css");
-  </style>
-  
+</style>

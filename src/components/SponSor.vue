@@ -1,6 +1,6 @@
 <template>
   <div class="sponsor">
-    <h2>Sponsors</h2>
+    <h2>#Sponsors</h2>
     <div class="marquee">
       <div class="track" ref="track" :style="{ animation: animationStyle }">
         <div class="content">
@@ -26,25 +26,29 @@
       };
     },
     computed: {
-      duplicatedItems() {
-        // Duplicate the items array to create seamless scrolling
-        return [...this.items, ...this.items, ...this.items,];
-      }
-    },
-    mounted() {
+    duplicatedItems() {
+      // Duplicate the items array to create seamless scrolling
+      return [...this.items,...this.items,...this.items,];
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
       this.adjustContent();
-      window.addEventListener("resize", this.adjustContent);
+    });
+    window.addEventListener("resize", this.adjustContent);
+  },
+  beforeUnmounted() {
+    window.removeEventListener("resize", this.adjustContent);
+  },
+  methods: {
+    getImageUrl(item) {
+      return item.startsWith("http")? item : require(`@/assets/${item}`);
     },
-    beforeUnmounted() {
-      window.removeEventListener("resize", this.adjustContent);
-    },
-    methods: {
-      getImageUrl(item) {
-        return item.startsWith("http") ? item : require(`@/assets/${item}`);
-      },
-      adjustContent() {
-        const trackWidth = this.$refs.track.clientWidth;
-        const contentWidth = this.$refs.track.querySelector(".content").scrollWidth;
+    adjustContent() {
+      const track = this.$refs.track;
+      if (track) {
+        const trackWidth = track.clientWidth;
+        const contentWidth = track.querySelector(".content").scrollWidth;
         if (contentWidth > trackWidth) {
           const diff = contentWidth - trackWidth;
           const duration = diff / 50; // Adjust scroll speed based on content width
@@ -52,14 +56,18 @@
         } else {
           this.animationStyle = "none";
         }
+      } else {
+        console.error("Track ref is not available");
       }
     }
+  }
   };
   </script>
   
   <style>
   .sponsor h2{
-    font-size: 34px;
+    font-size: 30px;
+    font-family:  "Montserrat Alternates", sans-serif;
     font-weight: 600;
     margin-top: 3rem;
     padding: 2rem 4rem;

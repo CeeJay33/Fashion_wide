@@ -17,11 +17,10 @@
   .navbar-mainbg {
     background-color: #fff;
     padding: 10px 2.5rem 10px 0;
-    margin: 0; /* Added to remove margin */
     position: sticky;
     top: 0;
-    left: 0;
-    z-index: 9999;
+    right: 0;
+    z-index: 999;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -183,7 +182,7 @@
       left: -25px;
   }
   
-  /* @media (max-width: 991px) {
+  @media (max-width: 991px) {
       .navbar-expand-custom {
           -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
@@ -234,4 +233,4 @@
           bottom: -25px;
           left: -25px;
       }
-  } */
+  }

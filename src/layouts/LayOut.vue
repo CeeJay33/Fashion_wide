@@ -1,6 +1,6 @@
 <template>
     <div>
-      <NavBar/>
+      <NavBar  :isDark="isDark"/>
         <slot>
 
         </slot>
@@ -18,6 +18,16 @@
      NavBar,
      FooterSec
    },
+   data() {
+    return {
+      isDark: false
+    };
+  },
+  methods: {
+    handleToggle(isDark) {
+      this.isDark = isDark;
+    }
+  }
 };
 
 </script>

@@ -23,7 +23,7 @@
       <div class="fashion__designers">
         <div class="designers__box" v-for="designer in designers" :key="designer.uniqued">
           <div class="desiners__image">
-            <img :src="`https://8tvxfmpq-80.uks1.devtunnels.ms/Fashion2/Fashion/${designer.company_logo}`" alt="" />
+            <img :src="`http://localhost:80/Fashion2/Fashion/${designer.company_logo}`" alt="" />
             <div class="pop__up__selection">
               <h3>{{ designer.company_name }}</h3>
               <div class="svg__pop__up">
@@ -46,7 +46,7 @@
           <div class="designer__addition__info">
             <div class="designer__profile__img">
               <div class="flex__area">
-                <img :src="`https://8tvxfmpq-80.uks1.devtunnels.ms/Fashion2/Fashion/${designer.file_path}`" alt="" />
+                <img :src="`http://localhost:80/Fashion2/Fashion/${designer.file_path}`" alt="" />
               </div>
               <div class="designer__profile__name">
                 <p>{{ designer.company_name }}</p>
@@ -234,7 +234,7 @@ export default {
 
     async updateLikesCount(designerId, likesCount) {
       try {
-        const response = await fetch('https://8tvxfmpq-80.uks1.devtunnels.ms/Fashion2/Fashion/AddLikes.php', {
+        const response = await fetch('http://localhost:80/Fashion2/Fashion/AddLikes.php', {
           method: 'POST',
           WithCredentials: true,
           headers: {
@@ -251,7 +251,7 @@ export default {
 
     async fetchLikesCount() {
       try {
-        const response = await fetch('https://8tvxfmpq-80.uks1.devtunnels.ms/Fashion2/Fashion/count.php');
+        const response = await fetch('http://localhost:80/Fashion2/Fashion/count.php');
         const data = await response.json();
         this.designers = data.data;
         console.log(data.data.likes)

@@ -77,14 +77,14 @@ export default {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:80/Fashion2/Fashion/ProgramSignInC.php',
+                url: 'http://localhost:80/SignUpClassesPhp/Login',
                 withCredentials: true,
                 data: {
                     itemEmail: this.FormData.itemEmail,
                     itemPassword: this.FormData.itemPassword
                 },
                 headers: {
-                    "content-type": "application/x-www-form-urlencoded"
+                    "content-type": "application/json"
                 }
             });
             this.responseData = response.data;
