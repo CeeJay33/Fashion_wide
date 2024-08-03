@@ -37,7 +37,7 @@ export default {
     }
   },
   async mounted() {
-    let response = await axios.get('http://localhost:80/Fashion2/Fashion/info.php')
+    let response = await axios.get('http://459jcr18-80.uks1.devtunnels.ms/Fashion2/Fashion/info.php')
     this.designers = response.data
     this.startAnimation();
   },
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getImageUrl(item) {
-      return item.startsWith("http") ? item : `http://localhost:80/Fashion2/Fashion/${item}`;
+      return item.startsWith("http") ? item : `http://459jcr18-80.uks1.devtunnels.ms/Fashion2/Fashion/${item}`;
     },
     isImage(filePath) {
       return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(filePath);
