@@ -3,6 +3,7 @@
             <div class="cont1" >
               <p>Here as Fashion Designer</p>
               <h2>Find your next opportunity</h2>
+               <h2>With Kalie Jay</h2>
               <span>Browse new Customers or boost your portfolio to get discovered.</span>
               <div class="buttons1">
                 <div class="bott1">
@@ -17,6 +18,7 @@
             <div class="con2" >
               <p>Here as a Customer</p>
               <h2>Discover trending designers</h2>
+              <h2>With Kalie Jay</h2>
               <span>Browse and Message your favorite designers for endless inspiration.</span>
               <div class="buttons2">
                 <div class="bott1">

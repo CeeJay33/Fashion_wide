@@ -9,6 +9,7 @@
   
 
   <SponSor/>
+  <FooterSec/>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 // import Layout from '@/layouts/LayOut.vue';
 import TopDesigners from '@/components/TopDesigners.vue';
 import NavBar from '@/components/NavBar.vue';
+import FooterSec from '@/components/FooterSec.vue';
 import HowTip from '@/components/HowTip.vue';
 import DesCript from '@/components/DesCript.vue';
 // import CarouSel from '@/components/CarouSel.vue';
@@ -32,7 +34,8 @@ export default {
      HowTip,
      DesCript,
     //  PopUp,
-    //  CarouSel,
+     //  CarouSel,
+    FooterSec,
      SponSor,
      HomeDesigners
    },

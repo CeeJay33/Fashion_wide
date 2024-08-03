@@ -1,8 +1,7 @@
  body{
     background-color: #fff;
  }
-
-
+ 
  .hero{
   display: flex;
   align-items: center;
@@ -50,6 +49,22 @@
   border: none;
 
 }
+
+.margin-t-33 {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #ffffff;
+  padding: 20px 0;
+  width: 160px;
+  cursor: pointer;
+  /* margin-top: 20px; */
+  border-radius: 30px;
+  border: none;
+
+}
+
 
   /* responsive style for hero section */
 

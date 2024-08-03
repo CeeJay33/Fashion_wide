@@ -6,9 +6,18 @@
       <transition name="navbar-collapse">
         <div class="collapse navbar-collapse" v-show="isNavbarOpen" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-            <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+            <div class="hori-selector">
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
             <li class="nav-item" v-for="(item, index) in items" :key="index" :class="{ 'active': item.route === $route.path }">
-              <router-link :to="item.route" class="nav-link" @click="setActive(item)">
+              <router-link 
+                :to="item.route" 
+                class="nav-link"
+                @click="setActive(item)"
+                @mouseover="handleMouseOver(item.label)"
+                @mouseleave="handleMouseLeave(item.label)"
+              >
                 <i :class="item.icon"></i>{{ item.label }}
               </router-link>
             </li>
@@ -18,7 +27,7 @@
 
       <div class="search__bar">
         <input type="search" placeholder="Search..." v-model="searchQuery" @keyup="search" @keydown.enter="redirectIfSingleResult" @click="showSuggestions = true">
-        <img :src="require('@/assets/search-interface-symbol_54481.png')" alt="Search Icon" v-on:click="redirectIfSingleResult">
+        <img :src="require('@/assets/search-interface-symbol_54481.png')" alt="Search Icon" @click="redirectIfSingleResult">
       
         <div class="suggestions" v-show="showSuggestions && Array.isArray(searchResults) && searchResults.length > 0">
           <ul>
@@ -30,12 +39,31 @@
       </div>
       <ToogleButton :isDark="isDark" @toggle="handleToggle"/>
       <div v-if="isAuthenticated">
-         <ProfileSuggest/>
+        <ProfileSuggest/>
       </div>
       <div v-else>
-       <button> <router-link to="/register-customer"> sign up</router-link></button>
+        <router-link to="/register-customer">
+          <button class="margin-t-33">sign up</button>
+        </router-link>
       </div>
     </nav>
+
+    <!-- Hover Element -->
+    <div 
+      class="nav hover__navigation__bar" 
+      :class="{ 'show': isHoveringHomePage }"
+    >
+      <div class="children__container">
+        <div class="navigation__hover__links">
+          <ul class="hover__links">
+            <li>Trending Designers</li>
+            <li>Favorites Designers</li>
+            <li>Seasonal Designers</li>
+            <li>Modelist</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div v-else>
@@ -46,7 +74,6 @@
 <script>
 import axios from 'axios';
 import ProfileSuggest from './ProfileSuggest.vue';
-// import ToogleButton from './toogle_button/ToogleButton.vue';
 import MobileNavigation from './screensizes/MobileNavigation.vue';
 import { isAuthenticated } from '@/auth/auth';
 
@@ -60,7 +87,6 @@ export default {
   components: {
     ProfileSuggest,
     MobileNavigation,
-    // ToogleButton
   },
   data() {
     return {
@@ -70,6 +96,7 @@ export default {
       showSuggestions: false,
       isAuthenticated: false,
       isNavbarOpen: true,
+      isHoveringHomePage: false, // New data property for hover state
       items: [
         { label: 'HomePage', icon: 'fas fa-tachometer-alt', route: '/' },
         { label: 'Learn More', icon: 'far fa-chart-bar', route: '/learnMore' },
@@ -85,17 +112,21 @@ export default {
       this.$nextTick(() => this.updateHoriSelector());
     },
 
-      async checkAuthentication() {
+    async checkAuthentication() {
+      const authenticated = await isAuthenticated();
+      this.isAuthenticated = authenticated;
+    },
 
-     const authenticated = await isAuthenticated();
-             if (authenticated) {
-                 this.isAuthenticated = true
-             } else {
-                 this.isAuthenticated = false
-             }
-
-      },
-    
+    handleMouseOver(label) {
+      if (label === 'HomePage') {
+        this.isHoveringHomePage = true; // Set true on hover
+      }
+    },
+    handleMouseLeave(label) {
+      if (label === 'HomePage') {
+        this.isHoveringHomePage = false; // Set false when hover is removed
+      }
+    },
 
     handleToggle(isDark) {
       this.$emit('toggle', isDark);
@@ -104,7 +135,6 @@ export default {
       if (activeItem.route === '/') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-
       this.$nextTick(() => {
         this.updateHoriSelector();
       });
@@ -163,7 +193,7 @@ export default {
   beforeUnmount() {
     window.removeEventListener('resize', this.checkScreenSize);
   },
-    async created() {
+  async created() {
     await this.checkAuthentication(); 
   }
 };
@@ -173,4 +203,9 @@ export default {
 @import url("@/styles/navbar.css");
 @import url( "@/styles/IsDarkForAll.css");
 
+
+
+.nav.hover__navigation__bar.show {
+  display: block; /* Show when hovering */
+}
 </style>
