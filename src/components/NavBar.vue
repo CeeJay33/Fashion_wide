@@ -14,9 +14,9 @@
               <router-link 
                 :to="item.route" 
                 class="nav-link"
-                @click="setActive(item)"
-                @mouseover="handleMouseOver(item.label)"
-                @mouseleave="handleMouseLeave(item.label)"
+            
+                @click="handleMouseOver(item.label)"
+               
               >
                 <i :class="item.icon"></i>{{ item.label }}
               </router-link>
@@ -122,11 +122,11 @@ export default {
         this.isHoveringHomePage = true; // Set true on hover
       }
     },
-    handleMouseLeave(label) {
-      if (label === 'HomePage') {
-        this.isHoveringHomePage = false; // Set false when hover is removed
-      }
-    },
+    // handleMouseLeave(label) {
+    //   if (label === 'HomePage') {
+    //     this.isHoveringHomePage = false; // Set false when hover is removed
+    //   }
+    // },
 
     handleToggle(isDark) {
       this.$emit('toggle', isDark);

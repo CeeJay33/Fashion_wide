@@ -19,6 +19,9 @@
                     <input type="submit" style="" value="SignUp Now" class="button">
                 </div>
             </form>
+             <div class="submit">
+            <button @click="loginWithGoogle"><img :src="require('@/assets/vecteezy_colourful-google-logo-in-dark-background_13760951-removebg-preview.png')" alt=""> Sign In with Google</button>
+          </div>
             <div class="Forgot">
                 <router-link to="">
                     <p>Forgot Password</p>
@@ -50,12 +53,28 @@ export default {
         };
     },
 
+    mounted() {
+        this.checkAuth();
+    },
+
     methods: {
+
+        loginWithGoogle() {
+      window.location.href = 'http://localhost:80/SignUpClassesPhp/GoogleAuth/login.php';
+        },
+
+       async checkAuth() {
+            const authenticated = await isAuthenticated();
+                if (authenticated) {
+                    this.$router.push('/dashboard');
+                } 
+        },
+
     async addItem() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:80/SignUpClassesPhp/Login',
+                url: 'http://localhost:80/SignUpClassesPhp/login/',
                 withCredentials: true,
                 data: {
                     itemEmail: this.FormData.itemEmail,

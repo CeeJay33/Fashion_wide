@@ -6,7 +6,7 @@
     </header>
     <!-- <hr width="100%"> -->
     <div class="login-sub-container">
-      <p class="login-instruction">Please login using the AliExpress seller account (do not use buyer account)</p>
+      <p class="login-instruction">Please login using the Kaylie customer account (do not use buyer account)</p>
       <p class="signup-link">No account yet? <a href="#">Join now for free</a></p>
       <form @submit.prevent="submitForm" id="login-form">
         <input 

@@ -19,14 +19,18 @@
                     <input type="submit" style="" value="SignUp Now" class="button">
                 </div>
           
-          <div class="submit">
-            <button ><img :src="require('@/assets/vecteezy_colourful-google-logo-in-dark-background_13760951-removebg-preview.png')" alt=""> Continue with Google</button>
-          </div>
 
           <!-- <div class="ssubmit">
             <button >Sign In as Designer</button>
           </div> -->
         </form>
+         <div class="submit">
+            <button @click="loginWithGoogle"><img :src="require('@/assets/vecteezy_colourful-google-logo-in-dark-background_13760951-removebg-preview.png')" alt=""> Continue with Google</button>
+          </div>
+
+          <div class="submit">
+            <button @click="loginWithGithub"><img :src="require('@/assets/vecteezy_colourful-google-logo-in-dark-background_13760951-removebg-preview.png')" alt=""> Continue with Github</button>
+          </div>
        
         <div class="Forgot">
           <router-link to="">
@@ -73,11 +77,19 @@ export default {
       this.$emit('close');
     },
 
+    loginWithGoogle() {
+      window.location.href = 'http://localhost:80/SignUpClassesPhp/GoogleAuth/signUp.php';
+    },
+
+    loginWithGithub() {
+      window.location.href = 'http://localhost:80/SignUpClassesPhp/GithubAuth/signUp.php';
+    },
+
     async addItem() {
         try {
             const response = await axios({
                 method: 'post',
-                url: 'http://localhost:80/SignUpClassesPhp/Login',
+                url: 'http://localhost:80/SignUpClassesPhp/login/',
                 withCredentials: true,
                 data: {
                     itemEmail: this.FormData.itemEmail,

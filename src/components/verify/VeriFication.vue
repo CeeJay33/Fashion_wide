@@ -51,7 +51,7 @@ export default {
       try {
         const Res = await axios({
           method: 'post',
-          url: 'http://localhost:80/SignUpClassesPhp/Verify',
+          url: 'http://localhost:80/SignUpClassesPhp/verify/',
           withCredentials: true,
           data: {
             otp: this.otp.join('')

@@ -59,12 +59,13 @@ export default {
     padding: 0.6rem 0.9rem;
     border-radius: 50%;
     cursor: pointer;
+    margin-right: 5rem;
   }
   
   .suggest__navigation__modal {
     position: absolute;
     top: 200%;
-    right: 0;
+    right: 15%;
     transform: translateY(0);
     width: 300px;
     height: 300px;

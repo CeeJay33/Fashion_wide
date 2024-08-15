@@ -192,8 +192,8 @@
     display: none;
     margin: auto;
     z-index: 999;
-    background-color: #ffffff;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.141);
+    background-color: #eaeaea;
+    /* box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.141); */
    animation: slide-up 0.5s;
   } 
 

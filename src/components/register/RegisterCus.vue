@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { isAuthenticated } from '@/auth/auth';
+// import router from '@/main';
 import axios from 'axios';
 
 export default {
@@ -72,13 +74,27 @@ export default {
             loading: false,
         };
     },
+
+    mounted() {
+        this.checkAuth();    
+    },
     methods: {
+
+       async checkAuth() {
+            const authenticated = await isAuthenticated();
+            if (authenticated) {
+                this.$router.push("/dashboard")
+            }   
+        },
+
+
+
         async addUser() {
             this.loading = true;
             try {
                 let Response = await axios({
                     method: 'post',
-                    url: 'http://localhost:80/SignUpClassesPhp/SignUp',
+                    url: 'http://localhost:80/SignUpClassesPhp/signUp/',
                     withCredentials: true,
                     data: {
                         Firstname: this.FormData.Firstname,
@@ -138,4 +154,9 @@ export default {
     width: 60px;
     filter: blur(0);
 }
-</style>
+</style> 
+
+
+
+
+
