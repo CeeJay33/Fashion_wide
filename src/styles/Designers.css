@@ -87,10 +87,10 @@ margin: 5px; /* Add margin to the social media icons */
   padding-left: 12px;
    padding-right: 12px;
     padding-top: 11px;
-    border: 1px solid #5161ce;
+    /* border: 1px solid #5161ce; */
   border-radius: 20px;
   cursor: pointer;
-  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.047);
   margin: 15px 0.5rem;
   transition: 0.2s ease;
   background-color: #fff;
@@ -212,8 +212,8 @@ font-weight: 500;
   }
   
   .trend .cont1 h2{
-    font-family: arial;
-    font-weight: 100;
+      font-family: "Archivo", serif;
+    font-weight: 400;
     font-size: 45px;
     line-height: 60px;
     color: #000;
@@ -275,8 +275,8 @@ font-weight: 500;
   }
   
   .trend .con2 h2{
-    font-family: arial;
-    font-weight: 100;
+    font-family: "Archivo", serif;
+    font-weight: 400;
     font-size: 45px;
     line-height: 60px;
     color: #000;

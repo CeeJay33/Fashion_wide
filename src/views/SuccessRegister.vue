@@ -25,17 +25,17 @@ export default {
   
   methods: {
     async fetchScript() {
-      const queryParam = this.$route.query.code; 
+      // const queryParam = this.$route.query.code; 
 
-      if (!queryParam) {
-        this.message = 'Code is missing in the URL';
-        return;
-      }
+      // if (!queryParam) {
+      //   this.message = 'Code is missing in the URL';
+      //   return;
+      // }
 
       try {
         const response = await axios({
           method: 'get',
-          url: `http://localhost:80/SignUpClassesPhp/GoogleAuth/callback.php?code=${queryParam}`, 
+          url: `http://localhost:80/SignUpClassesPhp/verify_callback_link/index?code=1c24f60099c1372ac0c88a38d74e0096a7c3583b23b44caa6bdf17098649159f890741ff197ad61f`, 
           headers: {
             'content-type': 'application/json',
           },

@@ -2,8 +2,8 @@
   <nav ref="navbar" class="navbar navbar-expand-custom navbar-mainbg">
     <img :src="require('@/assets/hmm-removebg-preview.png')" class="barr" alt="">
     <transition name="navbar-collapse">
-      <div class="collapse navbar-collapse" v-show="isNavbarOpen" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+      <div class=" navbar-collapse" v-show="isNavbarOpen" id="navbarSupportedContent">
+        <ul class="navbar-nav ">
           <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
           <li class="nav-item" v-for="(item, index) in items" :key="index" :class="{ 'active': item.route === $route.path }">
             <router-link v-if="item.label !== 'Sign Out'" :to="item.route" class="nav-link" @click="setActive(item)">

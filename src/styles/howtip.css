@@ -16,24 +16,26 @@
 }
 
 .descriptive__section{
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    margin: 5rem auto 0 auto;
     padding: 0 15px;
 }
 
 
 .descriptive__section h2{
-    font-family: "Playwrite DE Grund", cursive;
+     font-family: "Lora", serif;
+     max-width: 900px;
     color: #000;
-    font-size: 75px;
+    font-size: 80px;
+    margin: auto;
     text-align: center;
     line-height: 85px;
-    font-weight: 550;
+    /* font-weight: 500; */
 }
 
 .descriptive__section p{
     margin: 2rem 0 1rem 1rem;
-    font-family: "Playwrite DE Grund", cursive;
+    font-family: "Sora", sans-serif;
     color: #000;
     font-size: 18px;
     text-align: center;
@@ -86,52 +88,3 @@
 
 
 
-@media (max-width:499px){
-    .illustration__section {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin: 1rem 0;
-        padding: 4rem 0;
-    }
-
-    .descriptive__section h2 {
-        margin: 0;
-        padding: 10px 20px;
-        line-height: 40px;
-        font-weight: 500;
-        opacity: 0.8;
-        font-size: 40px;
-        width: 100%;
-        line-height: 50px;
-    }
-
-
-    .descriptive__section span {
-        line-height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 400;
-    }
-    .descriptive__section {
-        width: 100%;
-        text-align: left;
-        padding: 0 22px;
-    }
-
-    .descriptive__section p {
-        margin-top: 0.5rem;
-        padding: 0 20px;
-         display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .descriptive__image img {
-        width: 100%;
-        margin-top: 3rem;
-    }
-}

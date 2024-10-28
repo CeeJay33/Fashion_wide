@@ -10,10 +10,10 @@
                     <p>{{ responseData.message }}</p>
                 </div>
                 <div class="input__form">
-                    <input type="email" name="itemEmail" placeholder="Enter your Email" v-model="FormData.itemEmail">
+                    <input type="email" name="email" placeholder="Enter your Email" v-model="FormData.email">
                 </div>
                 <div class="input__form">
-                    <input type="password" name="itemPassword" placeholder="Password" v-model="FormData.itemPassword">
+                    <input type="password" name="password" placeholder="Password" v-model="FormData.password">
                 </div>
                 <div class="submit">
                     <input type="submit" style="" value="SignUp Now" class="button">
@@ -60,8 +60,8 @@ export default {
   data() {
         return {
             FormData: {
-                itemEmail: '',
-                itemPassword: ''
+                email: '',
+                password: ''
             },
             responseData: {
                 message: ''
@@ -82,38 +82,41 @@ export default {
     },
 
     loginWithGithub() {
-      window.location.href = 'http://localhost:80/SignUpClassesPhp/GithubAuth/signUp.php';
+      window.location.href = 'http://localhost:80/SignUpClassesPhp/GithubAuth/login.php';
     },
 
     async addItem() {
-        try {
-            const response = await axios({
-                method: 'post',
-                url: 'http://localhost:80/SignUpClassesPhp/login/',
-                withCredentials: true,
-                data: {
-                    itemEmail: this.FormData.itemEmail,
-                    itemPassword: this.FormData.itemPassword
-                },
-                headers: {
-                    "content-type": "application/json"
-                }
-            });
-            this.responseData = response.data;
-            if (this.responseData.status === "success") {
-                this.$router.push('/dashboard');
+    try {
+        const response = await axios({
+            method: 'post',
+            url: 'http://localhost:80/SignUpClassesPhp/login/',
+            withCredentials: true,
+            data: {
+                email: this.FormData.email,
+                password: this.FormData.password
+            },
+            headers: {
+                "content-type": "application/json"
             }
-        } catch (error) {
-            if (error.response && error.response.data && error.response.data.message) {
-                this.responseData.message = error.response.data.message;
-            } else {
-                this.responseData.message = "An error occurred. Please try again later.";
-            }
-            setTimeout(() => {
-                this.responseData.message = '';
-            }, 3000);
+        });
+
+        this.responseData = response.data;
+        if (this.responseData.status === "success") {
+            // Save the token to local storage
+            localStorage.setItem('token', this.responseData.token); // Adjust 'token' based on your actual response structure
+            this.$router.push('/dashboard');
         }
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.message) {
+            this.responseData.message = error.response.data.message;
+        } else {
+            this.responseData.message = "An error occurred. Please try again later.";
+        }
+        setTimeout(() => {
+            this.responseData.message = '';
+        }, 3000);
     }
+}
   }
 };
 </script>

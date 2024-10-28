@@ -1,6 +1,7 @@
 <template>
   <NavBar :isDark="isDark" @toggle="handleToggle" />
   <div class="home__view">
+    <SvgComp />
     <HowTip :isDark="isDark" />
     <TopDesigners />
     <DesCript />
@@ -20,6 +21,7 @@ import DesCript from '@/components/DesCript.vue';
 import SponSor from '@/components/SponSor.vue';
 import { isAuthenticated } from '@/auth/auth';
 import HomeDesigners from '@/components/HomeDesigners.vue';
+import SvgComp from '@/components/SvgComp.vue';
 
 export default {
   name: 'HomeView',
@@ -31,6 +33,7 @@ export default {
     FooterSec,
     SponSor,
     HomeDesigners,
+    SvgComp
   },
   data() {
     return {

@@ -4,7 +4,16 @@
       <div class="descriptive__section">
         <h2>Connect with the world’s Fashion Designers.</h2>
         <p>Kaylie allows you to share your profile as you live portfolio</p>
+        <div class="buttons2 items-center justify-center" >
+                <!-- <div class="bott1">
+                  <button class="btnn">Get started </button>
+                </div> -->
+                <div class="bott1">
+                  <button class="btnn">Get discovered</button>
+                </div>
+            </div>
       </div>
+      
       
       <!-- <div class="descriptive__image">
         <img :src="require('@/assets/pexels-manei-2690323-removebg-preview.png')" alt="">

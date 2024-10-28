@@ -4,8 +4,8 @@
       <img :src="require('@/assets/hmm-removebg-preview.png')" class="barr" alt="">
       
       <transition name="navbar-collapse">
-        <div class="collapse navbar-collapse" v-show="isNavbarOpen" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
+        <div class=" navbar-collapse" v-show="isNavbarOpen" id="navbarSupportedContent">
+          <ul class="navbar-nav ">
             <div class="hori-selector">
               <div class="left"></div>
               <div class="right"></div>

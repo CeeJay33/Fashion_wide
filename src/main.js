@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import '@fortawesome/fontawesome-free/css/all.css'
+import "@/assets/tailwind/tailwind.css";
 
 
 import App from '@/App.vue';
