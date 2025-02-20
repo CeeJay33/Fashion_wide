@@ -74,7 +74,7 @@ export default {
           },
         });
         this.responseData = response.data;
-        const firstname = this.responseData.name || "Guest";
+        const firstname = this.responseData.name || "Guest User";
         const lastname = this.responseData.lastname || "";
         this.Users = firstname + " " + lastname; 
       } catch (error) {
@@ -106,7 +106,7 @@ export default {
   top: 200%;
   right: 15%;
   transform: translateY(0);
-  width: 300px;
+  width: 350px;
   height: 300px;
   background-color: #fff;
   border: 1px solid #ccc;

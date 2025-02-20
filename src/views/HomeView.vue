@@ -43,7 +43,7 @@ export default {
   async mounted() {
     const authenticated = await isAuthenticated();
     if (authenticated) {
-      this.$router.push('/dashboard');
+      // this.$router.push('/dashboard');
     } else {
       this.$router.push('/');
     }

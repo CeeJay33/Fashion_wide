@@ -12,7 +12,7 @@
 
 
 .Main__Container h3{
-    font-family: "Playwrite DE Grund", cursive;
+    font-family: "Archivo";
 }
 
 .descriptive__section{
@@ -23,10 +23,10 @@
 
 
 .descriptive__section h2{
-     font-family: "Lora", serif;
+    font-family: "Sora", serif;
      max-width: 900px;
     color: #000;
-    font-size: 80px;
+    font-size: 70px;
     margin: auto;
     text-align: center;
     line-height: 85px;

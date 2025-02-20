@@ -78,7 +78,7 @@ export default {
     },
 
     loginWithGoogle() {
-      window.location.href = 'http://localhost:80/SignUpClassesPhp/GoogleAuth/signUp.php';
+      window.location.href = 'http://localhost:80/SignUpClassesPhp/GoogleAuth/login.php';
     },
 
     loginWithGithub() {
@@ -131,8 +131,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(17, 17, 17, 0.5); /* Semi-transparent background */
-  backdrop-filter: blur(6px); /* Apply blur effect */
+  background: rgba(17, 17, 17, 0.5); 
+  backdrop-filter: blur(6px); 
   overflow-y: hidden;
   z-index: 9999;
 }

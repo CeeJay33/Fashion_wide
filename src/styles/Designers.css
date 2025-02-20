@@ -87,10 +87,10 @@ margin: 5px; /* Add margin to the social media icons */
   padding-left: 12px;
    padding-right: 12px;
     padding-top: 11px;
-    /* border: 1px solid #5161ce; */
+    border: 1px solid #b9b8b8;
   border-radius: 20px;
   cursor: pointer;
-  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.047);
+  /* box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.047); */
   margin: 15px 0.5rem;
   transition: 0.2s ease;
   background-color: #fff;
@@ -99,7 +99,7 @@ margin: 5px; /* Add margin to the social media icons */
 
  .pro:hover{
   box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
-  border: 1px solid #5161ce;
+  border: 1px solid #b1bafa;
 }
 
  .pro img{
@@ -189,7 +189,7 @@ font-weight: 500;
 .trend{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     background-color: #fff;
    
   
@@ -206,7 +206,7 @@ font-weight: 500;
   
   .trend .cont1 p{
     background: #fff;
-    padding: 5px 20px;
+    padding: 5px 10px;
     width: 50%;
     border-radius: 20px;
   }

@@ -14,10 +14,10 @@
             <div class="sponsored">Sponsored • <span class="dealer-name">Sunrise Ford</span></div>
             <h2 class="truck-title">{{ designer.product_name }}</h2>
             <ul class="truck-details">
-              <li>52,345 mi</li>
+              <!-- <li>52,345 mi</li>
               <li>250 hp 2L I4</li>
               <li>Automatic</li>
-              <li>FWD</li>
+              <li>FWD</li> -->
             </ul>
             <div class="pricing">
               <div class="price">${{ designer.product_price }}</div>
@@ -26,8 +26,8 @@
             </div>
             <div class="location">Fontana, CA (45 mi away)</div>
             <div class="buttons">
-              <button class="info-btn">Request Info</button>
-              <button class="checkout-btn">Checkout</button>
+              <!-- <button class="info-btn">Request Info</button>
+              <button class="checkout-btn">Checkout</button> -->
             </div>
           </div>
         </div>
@@ -177,6 +177,7 @@ export default {
     box-shadow: 0 4px 20px rgba(121, 121, 121, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 3rem;
 }
 
 .truck-card:hover {
